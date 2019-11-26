@@ -1,0 +1,13 @@
+---
+- name: restart domain-exporter
+  docker_service:
+    project_src: "{{ domain_exporter_docker_directory }}"
+    state: present
+    restarted: yes
+  become: yes
+  become_user: "{{ domain_exporter_docker_user }}"
+  when: not start_domain_docker.changed
+  tags:
+    - domain_exporter_docker
+    - domain_exporter_docker_deploy
+    - domain_exporter_docker_testing

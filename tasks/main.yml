@@ -1,0 +1,49 @@
+---
+- name: Create domain-exporter docker user
+  user:
+    name: "{{ domain_exporter_docker_user }}"
+    home: "{{ domain_exporter_docker_directory }}"
+    createhome: yes
+    groups: docker
+    append: yes
+    shell: /bin/bash
+  become: yes
+  tags:
+    - domain_exporter_docker
+
+- name: Pull domain-exporter docker image
+  docker_image:
+    name: "{{ domain_exporter_docker_image_name }}:{{ domain_exporter_docker_version }}"
+    force: "{{ domain_exporter_docker_pull_images|bool }}"
+  become: yes
+  become_user: "{{ domain_exporter_docker_user }}"
+  tags:
+    - domain_exporter_docker
+    - domain_exporter_docker_testing
+
+- name: Template docker-compose.yml
+  template:
+    src: docker-compose.yml.j2
+    dest: "{{ domain_exporter_docker_directory }}/docker-compose.yml"
+    mode: 0750
+  become: yes
+  become_user: "{{ domain_exporter_docker_user }}"
+  notify:
+    - restart domain-exporter
+  tags:
+    - domain_exporter_docker
+    - domain_exporter_docker_deploy
+    - domain_exporter_docker_testing
+
+- name: Start domain-exporter docker
+  docker_service:
+    project_src: "{{ domain_exporter_docker_directory }}"
+    state: present
+  become: yes
+  become_user: "{{ domain_exporter_docker_user }}"
+  register: start_domain_docker
+  tags:
+    - domain_exporter_docker
+    - domain_exporter_docker_deploy
+    - domain_exporter_docker_testing
+    
