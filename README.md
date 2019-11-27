@@ -34,4 +34,4 @@ Including an example of how to use your role (for instance, with variables passe
 
 Add as a submodule to your playbook repo
 
-    git submodule add git@bitbucket.org:jishteknique/ansible-role-domain-exporter-docker.git roles/domain-exporter-docker
+    git submodule add  https://github.com/tekniqueltd/ansible-role-domain-exporter-docker.git roles/domain-exporter-docker
