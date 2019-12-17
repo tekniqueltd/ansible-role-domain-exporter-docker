@@ -1,8 +1,0 @@
-version: '2.2'
-services:
-  domain_exporter:
-    container_name: domain_exporter
-    image: {{ domain_exporter_docker_image_name }}:{{ domain_exporter_docker_version }}
-    ports:
-      - {{ domain_exporter_port }}:{{ domain_exporter_port }}
-    restart: always

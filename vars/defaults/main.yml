@@ -1,7 +1,0 @@
----
-domain_exporter_docker_image_name: caarlos0/domain_exporter
-domain_exporter_docker_version: latest
-domain_exporter_docker_pull_images: yes
-domain_exporter_docker_user: domain-exporter
-domain_exporter_docker_directory: /srv/domain-exporter
-domain_exporter_port: 9222
