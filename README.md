@@ -28,6 +28,8 @@ Including an example of how to use your role (for instance, with variables passe
     ---
     - name: Example play with some optional vars set
       hosts: all
+      vars:
+        monitoring_host: "domain_exporter_url" #default is localhost
       roles:
         - { role: domain-exporter-docker
           }

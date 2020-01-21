@@ -1,6 +1,6 @@
 ---
-- name: restart domain-exporter
-  docker_service:
+- name: restart domain_exporter
+  docker_compose:
     project_src: "{{ domain_exporter_docker_directory }}"
     state: present
     restarted: yes

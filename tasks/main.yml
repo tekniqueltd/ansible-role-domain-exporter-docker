@@ -1,5 +1,5 @@
 ---
-- name: Create domain-exporter docker user
+- name: Create domain_exporter docker user
   user:
     name: "{{ domain_exporter_docker_user }}"
     home: "{{ domain_exporter_docker_directory }}"
@@ -11,7 +11,7 @@
   tags:
     - domain_exporter_docker
 
-- name: Pull domain-exporter docker image
+- name: Pull domain_exporter docker image
   docker_image:
     name: "{{ domain_exporter_docker_image_name }}:{{ domain_exporter_docker_version }}"
     force: "{{ domain_exporter_docker_pull_images|bool }}"
@@ -29,14 +29,14 @@
   become: yes
   become_user: "{{ domain_exporter_docker_user }}"
   notify:
-    - restart domain-exporter
+    - restart domain_exporter
   tags:
     - domain_exporter_docker
     - domain_exporter_docker_deploy
     - domain_exporter_docker_testing
 
-- name: Start domain-exporter docker
-  docker_service:
+- name: Start domain_exporter docker
+  docker_compose:
     project_src: "{{ domain_exporter_docker_directory }}"
     state: present
   become: yes
